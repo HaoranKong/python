@@ -76,21 +76,44 @@ class ElctricCar(Car):
     def __init__(self,make,model,year):
         """初始化父类的属性"""
         super().__init__(make,model,year)
-        self.battery_size=75
+        self.battery=battery()
     def describe_battery(self):
         """打印一条描述电瓶容量的消息"""
-        print(f"This car has a {self.battery_size}-kWh battery.")
+        print(f"This car has a {self.battery.battery_size}-kWh battery.")
     def fill_gas_tank(self):
         """电动车没有油箱"""
         print("This car doesn't need a gas tank!")
     def get_description_name(self):
         """返回整洁的描述信息"""
-        long_name=f"{self.year} {self.make} {self.model}{self.battery_size}"
+        long_name=f"{self.year} {self.make} {self.model}{self.battery.battery_size}"
         return long_name.title()
 
-# my_tesla=ElctricCar('tesla','model s',2019)
-# print(my_tesla.get_description_name())
-# my_tesla.describe_battery()
-# print(my_tesla.get_description_name())
 
-class batt
+
+class battery:
+    """一次模拟电动汽车电瓶的简单尝试"""
+    def __init__(self,battery_size=75):
+        """初始化电瓶的属性"""
+        self.battery_size=battery_size
+    def describe_battery(self):
+        """打印一条描述电瓶容量的消息"""
+        print(f"This car has a {self.battery_size}-kWh battery.")
+    def get_range(self):
+        """打印一条消息，指出电瓶的续航里程"""
+        if self.battery_size==75:
+            range=260
+        elif self.battery_size==100:
+            range=315
+        print(f"This car can go about {range} miles on a full charge.")
+    def upgrade_battery(self):
+        """升级电瓶容量"""
+        if self.battery_size!=100:
+            self.battery_size=100
+            print("Upgraded the battery to 100 kWh.")
+        else:
+            print("The battery is already upgraded.")
+
+my_tesla=ElctricCar('tesla','model s',2019)
+print(my_tesla.get_description_name())
+my_tesla.describe_battery()
+print(my_tesla.get_description_name())
